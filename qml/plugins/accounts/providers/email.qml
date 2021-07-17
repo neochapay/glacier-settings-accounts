@@ -40,6 +40,12 @@ import org.nemomobile.accounts 1.0
 Page {
     id: root
 
+    headerTools: HeaderToolsLayout {
+        title: qsTr("Generic email account")
+        showBackButton: true
+    }
+
+
 //    acceptButtonText: "Save"
 //    rejectButtonText: "Reject"
 
@@ -131,23 +137,15 @@ Page {
                 }
             }
 
-            Button {
+            GlacierRoller {
                 id: serverType
+                label: "Incoming server type"
                 width:  parent.width
-                text: "Incoming server type"
-                property alias currentIndex: serverTypeDialog.currentIndex
 
-                GlacierRoller {
-                    id: serverTypeDialog
-                    label: serverType.text
-
-                    model: ListModel {
-                        ListElement { name: "IMAP4" }
-                        ListElement { name: "POP3" }
-                    }
+                model: ListModel {
+                    ListElement { name: "IMAP4" }
+                    ListElement { name: "POP3" }
                 }
-
-                onClicked: serverTypeDialog.open()
             }
 
             TextField {

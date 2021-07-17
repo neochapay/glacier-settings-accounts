@@ -42,8 +42,6 @@ Page {
         title: qsTr("Accounts")
         showBackButton: true
     }
-    //    acceptButtonText: "Create"
-    //    rejectButtonText: "Cancel"
 
     property AccountModel accountModel
     property variant provider: accountModel.provider(selectedProvider)
