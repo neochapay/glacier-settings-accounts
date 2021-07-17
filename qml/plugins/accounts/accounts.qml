@@ -93,19 +93,6 @@ Page {
 
         }
 
-        //        delegate: DrilldownDelegate {
-        //            iconSource: model.accountIcon
-        //            titleText: model.providerDisplayName
-        //            subtitleText: model.accountDisplayName
-
-        //            onPressAndHold: {
-        //            }
-        //        }
-
-        //        footer: DrilldownDelegate {
-        //            titleText: "Add account"
-        //            iconSource: "image://theme/icon-m-common-add"
-        //        }
     }
 
     ScrollDecorator{
