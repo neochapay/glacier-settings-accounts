@@ -135,7 +135,7 @@ Page {
                 id: serverType
                 width:  parent.width
                 text: "Incoming server type"
-                property alias currentIndex: serverTypeDialog.selectedIndex
+                property alias currentIndex: serverTypeDialog.currentIndex
 
                 GlacierRoller {
                     id: serverTypeDialog
@@ -186,7 +186,7 @@ Page {
                 id: incomingSecureConnection
                 width:  parent.width
                 text: "Secure connection"
-                property alias currentIndex: incomingSecureConnectionDialog.selectedIndex
+                property alias currentIndex: incomingSecureConnectionDialog.currentIndex
 
                 GlacierRoller {
                     id: incomingSecureConnectionDialog
@@ -249,7 +249,7 @@ Page {
                 id: smtpSecureConnection
                 width:  parent.width
                 text: "Secure connection"
-                property alias currentIndex: smtpSecureConnectionDialog.selectedIndex
+                property alias currentIndex: smtpSecureConnectionDialog.currentIndex
 
                 GlacierRoller  {
                     id: smtpSecureConnectionDialog
@@ -277,9 +277,9 @@ Page {
                 width: parent.width
                 text: "Authentication"
 
-                SelectionDialog {
+                GlacierRoller {
                     id: smtpAuthenticationDialog
-                    titleText: smtpAuthentication.text
+                    label: smtpAuthentication.text
 
                     model: ListModel {
                         ListElement {
