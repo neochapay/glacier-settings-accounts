@@ -41,13 +41,9 @@ Page {
     id: root
 
     headerTools: HeaderToolsLayout {
-        title: qsTr("Generic email account")
+        title: qsTr("Email")
         showBackButton: true
     }
-
-
-//    acceptButtonText: "Save"
-//    rejectButtonText: "Reject"
 
     property int accountId: 0
     property Provider provider
@@ -61,7 +57,8 @@ Page {
     property bool smtpUsernameEdited: false
     property bool smtpPasswordEdited: false
 
-    anchors.fill: parent
+    width: parent.width;
+    height: parent.height;
 
     property Account account: Account {
         identifier: root.accountId
@@ -146,6 +143,17 @@ Page {
                     ListElement { name: "IMAP4" }
                     ListElement { name: "POP3" }
                 }
+                delegate: GlacierRollerItem{
+                    Text{
+                        height: serverType.itemHeight
+                        verticalAlignment: Text.AlignVCenter
+                        text: name
+                        color: Theme.textColor
+                        font.pixelSize: Theme.fontSizeMedium
+                        font.bold: (serverType.activated && serverType.currentIndex === index)
+                    }
+                }
+
             }
 
             TextField {
@@ -180,27 +188,31 @@ Page {
                 placeholderText: "Incoming server address"
             }
 
-            Button {
+            GlacierRoller {
                 id: incomingSecureConnection
+                label: "Secure connection"
                 width:  parent.width
-                text: "Secure connection"
-                property alias currentIndex: incomingSecureConnectionDialog.currentIndex
 
-                GlacierRoller {
-                    id: incomingSecureConnectionDialog
-                    label: incomingSecureConnection.text
-
-                    model: ListModel {
-                        ListElement {
-                            name: "None"
-                        }
-                        ListElement { name: "SSL" }
-                        ListElement { name: "TLS" }
+                model: ListModel {
+                    ListElement {
+                        name: "None"
+                    }
+                    ListElement { name: "SSL" }
+                    ListElement { name: "TLS" }
+                }
+                delegate: GlacierRollerItem{
+                    Text{
+                        height: incomingSecureConnection.itemHeight
+                        verticalAlignment: Text.AlignVCenter
+                        text: name
+                        color: Theme.textColor
+                        font.pixelSize: Theme.fontSizeMedium
+                        font.bold: (incomingSecureConnection.activated && incomingSecureConnection.currentIndex === index)
                     }
                 }
 
-                onClicked: incomingSecureConnectionDialog.open()
             }
+
 
             TextField {
                 id: incomingPortField
@@ -243,24 +255,28 @@ Page {
                 placeholderText: "Outgoing server address"
             }
 
-            Button {
+            GlacierRoller  {
                 id: smtpSecureConnection
+                label: "Secure connection"
                 width:  parent.width
-                text: "Secure connection"
-                property alias currentIndex: smtpSecureConnectionDialog.currentIndex
 
-                GlacierRoller  {
-                    id: smtpSecureConnectionDialog
-                    label: smtpSecureConnection.text
+                model: ListModel {
+                    ListElement { name: "None" }
+                    ListElement { name: "SSL" }
+                    ListElement { name: "TLS" }
+                }
 
-                    model: ListModel {
-                        ListElement { name: "None" }
-                        ListElement { name: "SSL" }
-                        ListElement { name: "TLS" }
+                delegate: GlacierRollerItem{
+                    Text{
+                        height: smtpSecureConnection.itemHeight
+                        verticalAlignment: Text.AlignVCenter
+                        text: name
+                        color: Theme.textColor
+                        font.pixelSize: Theme.fontSizeMedium
+                        font.bold: (smtpSecureConnection.activated && smtpSecureConnection.currentIndex === index)
                     }
                 }
 
-                onClicked: smtpSecureConnectionDialog.open()
             }
 
             TextField {
@@ -270,30 +286,44 @@ Page {
                 placeholderText: "Outgoing server port"
             }
 
-            Button {
+
+            GlacierRoller {
                 id: smtpAuthentication
-                width: parent.width
-                text: "Authentication"
+                label: "Authentication"
 
-                GlacierRoller {
-                    id: smtpAuthenticationDialog
-                    label: smtpAuthentication.text
-
-                    model: ListModel {
-                        ListElement {
-                            name: "None"
-                        }
-                        ListElement {
-                            name: "Password"
-                        }
-                        ListElement {
-                            name: "Encrypted Password"
-                        }
+                model: ListModel {
+                    ListElement {
+                        name: "None"
+                    }
+                    ListElement {
+                        name: "Password"
+                    }
+                    ListElement {
+                        name: "Encrypted Password"
+                    }
+                }
+                delegate: GlacierRollerItem{
+                    Text{
+                        height: smtpAuthentication.itemHeight
+                        verticalAlignment: Text.AlignVCenter
+                        text: name
+                        color: Theme.textColor
+                        font.pixelSize: Theme.fontSizeMedium
+                        font.bold: (smtpAuthentication.activated && smtpAuthentication.currentIndex === index)
                     }
                 }
 
-                onClicked: smtpAuthenticationDialog.open()
             }
+
+            Button {
+                width: parent.width
+                text: qsTr("Save")
+                onClicked: {
+                    if (stackView) { stackView.pop() }
+                    if (stackView) { stackView.pop() }
+                }
+            }
+
         }
     }
 

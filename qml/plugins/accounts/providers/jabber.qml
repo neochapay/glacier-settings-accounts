@@ -39,11 +39,8 @@ import org.nemomobile.accounts 1.0
 Page {
     id: root
 
-//    acceptButtonText: "Save"
-//    rejectButtonText: "Reject"
-
     headerTools: HeaderToolsLayout {
-        title: qsTr("Jabber account")
+        title: qsTr("Jabber")
         showBackButton: true
     }
 
@@ -149,6 +146,16 @@ Page {
             /* TODO: server address and port customisation
              * mostly just need to figure out how to tell the identity about it
              */
+
+            Button {
+                width: parent.width
+                text: qsTr("Save")
+                onClicked: {
+                    if (stackView) { stackView.pop() }
+                    if (stackView) { stackView.pop() }
+                }
+            }
+
         }
     }
 
