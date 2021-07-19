@@ -34,7 +34,7 @@ import QtQuick.Controls 1.0
 import QtQuick.Controls.Nemo 1.0
 import QtQuick.Controls.Styles.Nemo 1.0
 import org.nemomobile.accounts 1.0
-//import org.nemomobile.signon 1.0
+import org.nemomobile.signon 1.0
 
 Page {
     id: root
@@ -73,28 +73,28 @@ Page {
         }
     }
 
-//    property Identity identity: Identity {
-//        identifier: root.accountId ? account.identityIdentifier(root.__defaultServiceName) : 0
-//        identifierPending: root.accountId != 0
+    property Identity identity: Identity {
+        identifier: root.accountId ? account.identityIdentifier(root.__defaultServiceName) : 0
+        identifierPending: root.accountId != 0
 
-//        onStatusChanged: {
-//            if (status === Identity.Initialized) {
-//                incomingUsernameField.text = userName
-//                incomingPasswordField.text = secret
-//            } else if (status === Identity.Synced) {
-//                account.displayName = incomingUsernameField.text
-//                for (var i in provider.serviceNames) {
-//                    account.enableWithService(provider.serviceNames[i])
-//                    account.setIdentityIdentifier(identity.identifier, provider.serviceNames[i])
-//                }
-//                account.sync()
-//            } else if (status === Identity.Error) {
-//                // XXX display "error" dialog?
-//                console.log("Jabber provider identity error:", errorMessage)
-//                root.reject()
-//            }
-//        }
-//    }
+        onStatusChanged: {
+            if (status === Identity.Initialized) {
+                incomingUsernameField.text = userName
+                incomingPasswordField.text = secret
+            } else if (status === Identity.Synced) {
+                account.displayName = incomingUsernameField.text
+                for (var i in provider.serviceNames) {
+                    account.enableWithService(provider.serviceNames[i])
+                    account.setIdentityIdentifier(identity.identifier, provider.serviceNames[i])
+                }
+                account.sync()
+            } else if (status === Identity.Error) {
+                // XXX display "error" dialog?
+                console.log("Jabber provider identity error:", errorMessage)
+                root.reject()
+            }
+        }
+    }
 
     Flickable {
         id: flickable
@@ -105,13 +105,13 @@ Page {
         Column {
             id: contentColumn
 
-            spacing: UiConstants.DefaultMargin
+            spacing: Theme.itemSpacingMedium
             width: parent.width
 
             Item {
                 width: parent.width
                 height: theme.itemSizeSmall
-                x: UiConstants.DefaultMargin
+                x: Theme.itemSpacingMedium
 
                 Image {
                     id: icon
@@ -122,7 +122,7 @@ Page {
                 }
                 Label {
                     anchors.left: icon.right
-                    anchors.leftMargin: UiConstants.DefaultMargin
+                    anchors.leftMargin: Theme.itemSpacingMedium
                     anchors.verticalCenter: parent.verticalCenter
                     text: root.name
                 }
@@ -151,6 +151,7 @@ Page {
                 width: parent.width
                 text: qsTr("Save")
                 onClicked: {
+                    accepted();
                     if (stackView) { stackView.pop() }
                     if (stackView) { stackView.pop() }
                 }
@@ -159,24 +160,25 @@ Page {
         }
     }
 
-//    onAccepted: {
-//        identity.userName = incomingUsernameField.text
-//        identity.secret = incomingPasswordField.text
+    function accepted() {
+        identity.userName = incomingUsernameField.text
+        identity.secret = incomingPasswordField.text
 
-//        identity.sync()
+        identity.sync()
+    }
 
-//    }
+    function reject() {
+        // if this is a new account, delete the account
+        if (root.accountId === 0) {
+            if (identity.status === Identity.Initialized) {
+                identity.remove()
+            }
+            if (account.status === Account.Initialized) {
+                account.remove()
+            }
+        }
+    }
 
-//    onRejected: {
-//        // if this is a new account, delete the account
-//        if (root.accountId === 0) {
-//            if (identity.status === Identity.Initialized) {
-//                identity.remove()
-//            }
-//            if (account.status === Account.Initialized) {
-//                account.remove()
-//            }
-//        }
-//    }
+
 }
 

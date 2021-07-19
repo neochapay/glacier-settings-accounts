@@ -35,7 +35,7 @@ import QtQuick.Controls.Nemo 1.0
 import QtQuick.Controls.Styles.Nemo 1.0
 
 import org.nemomobile.accounts 1.0
-//import org.nemomobile.signon 1.0
+import org.nemomobile.signon 1.0
 
 Page {
     id: root
@@ -79,28 +79,28 @@ Page {
         }
     }
 
-//    property Identity identity: Identity {
-//        identifier: root.accountId ? account.identityIdentifier(root.__defaultServiceName) : 0
-//        identifierPending: root.accountId != 0
+    property Identity identity: Identity {
+        identifier: root.accountId ? account.identityIdentifier(root.__defaultServiceName) : 0
+        identifierPending: root.accountId != 0
 
-//        onStatusChanged: {
-//            if (status === Identity.Initialized) {
-//                incomingUsernameField.text = userName
-//                incomingPasswordField.text = secret
-//            } else if (status === Identity.Synced) {
-//                account.displayName = incomingUsernameField.text
-//                for (var i in provider.serviceNames) {
-//                    account.enableWithService(provider.serviceNames[i])
-//                    account.setIdentityIdentifier(identity.identifier, provider.serviceNames[i])
-//                }
-//                account.sync()
-//            } else if (status === Identity.Error) {
-//                // XXX display "error" dialog?
-//                console.log("Generic email provider identity error:", errorMessage)
-//                root.reject()
-//            }
-//        }
-//    }
+        onStatusChanged: {
+            if (status === Identity.Initialized) {
+                incomingUsernameField.text = userName
+                incomingPasswordField.text = secret
+            } else if (status === Identity.Synced) {
+                account.displayName = incomingUsernameField.text
+                for (var i in provider.serviceNames) {
+                    account.enableWithService(provider.serviceNames[i])
+                    account.setIdentityIdentifier(identity.identifier, provider.serviceNames[i])
+                }
+                account.sync()
+            } else if (status === Identity.Error) {
+                // XXX display "error" dialog?
+                console.log("Generic email provider identity error:", errorMessage)
+                root.reject()
+            }
+        }
+    }
 
     Flickable {
         id: flickable
@@ -111,13 +111,13 @@ Page {
         Column {
             id: contentColumn
 
-            spacing: UiConstants.DefaultMargin
+            spacing: Theme.itemSpacingMedium
             width: parent.width
 
             Item {
                 width: parent.width
                 height: theme.itemSizeSmall
-                x: UiConstants.DefaultMargin
+                x: Theme.itemSpacingMedium
 
                 Image {
                     id: icon
@@ -128,7 +128,7 @@ Page {
                 }
                 Label {
                     anchors.left: icon.right
-                    anchors.leftMargin: UiConstants.DefaultMargin
+                    anchors.leftMargin: Theme.itemSpacingMedium
                     anchors.verticalCenter: parent.verticalCenter
                     text: root.name
                 }
@@ -319,6 +319,7 @@ Page {
                 width: parent.width
                 text: qsTr("Save")
                 onClicked: {
+                    accepted()
                     if (stackView) { stackView.pop() }
                     if (stackView) { stackView.pop() }
                 }
@@ -328,57 +329,58 @@ Page {
     }
 
 //    onAccepted: {
-//        identity.userName = incomingUsernameField.text
-//        identity.secret = incomingPasswordField.text
-//        //change to username depending on the design
-//        account.setConfigurationValue("emailaddress", incomingUsernameField.text, __defaultServiceName)
+    function accepted() {
+        identity.userName = incomingUsernameField.text
+        identity.secret = incomingPasswordField.text
+        //change to username depending on the design
+        account.setConfigurationValue("emailaddress", incomingUsernameField.text, __defaultServiceName)
 
-//        //this should go to the service file
-//        account.setConfigurationValue("type", "8", __defaultServiceName)
+        //this should go to the service file
+        account.setConfigurationValue("type", "8", __defaultServiceName)
 
-//        if(serverType.currentIndex == 0) {
-//            account.setConfigurationValue("imap4/password", incomingPasswordField.text, __defaultServiceName)
-//            account.setConfigurationValue("imap4/username", incomingUsernameField.text, __defaultServiceName)
-//            account.setConfigurationValue("imap4/server", incomingServerField.text, __defaultServiceName)
-//            account.setConfigurationValue("imap4/port", incomingPortField.text, __defaultServiceName)
-//            account.setConfigurationValue("imap4/encryption", incomingSecureConnection.currentIndex, __defaultServiceName)
-//            account.setConfigurationValue("imap4/pushCapable", 0, __defaultServiceName)
-//            account.setConfigurationValue("imap4/checkInterval", 0, __defaultServiceName)
-//            account.setConfigurationValue("imap4/servicetype", "source", __defaultServiceName)
-//        }
-//        else {
-//            account.setConfigurationValue("pop3/password", incomingPasswordField.text, __defaultServiceName)
-//            account.setConfigurationValue("pop3/username", incomingUsernameField.text, __defaultServiceName)
-//            account.setConfigurationValue("pop3/server", incomingServerField.text, __defaultServiceName)
-//            account.setConfigurationValue("pop3/port", incomingPortField.text, __defaultServiceName)
-//            account.setConfigurationValue("pop3/encryption", incomingSecureConnection.currentIndex, __defaultServiceName)
-//            account.setConfigurationValue("pop3/servicetype", "source", __defaultServiceName)
-//        }
+        if(serverType.currentIndex == 0) {
+            account.setConfigurationValue("imap4/password", incomingPasswordField.text, __defaultServiceName)
+            account.setConfigurationValue("imap4/username", incomingUsernameField.text, __defaultServiceName)
+            account.setConfigurationValue("imap4/server", incomingServerField.text, __defaultServiceName)
+            account.setConfigurationValue("imap4/port", incomingPortField.text, __defaultServiceName)
+            account.setConfigurationValue("imap4/encryption", incomingSecureConnection.currentIndex, __defaultServiceName)
+            account.setConfigurationValue("imap4/pushCapable", 0, __defaultServiceName)
+            account.setConfigurationValue("imap4/checkInterval", 0, __defaultServiceName)
+            account.setConfigurationValue("imap4/servicetype", "source", __defaultServiceName)
+        }
+        else {
+            account.setConfigurationValue("pop3/password", incomingPasswordField.text, __defaultServiceName)
+            account.setConfigurationValue("pop3/username", incomingUsernameField.text, __defaultServiceName)
+            account.setConfigurationValue("pop3/server", incomingServerField.text, __defaultServiceName)
+            account.setConfigurationValue("pop3/port", incomingPortField.text, __defaultServiceName)
+            account.setConfigurationValue("pop3/encryption", incomingSecureConnection.currentIndex, __defaultServiceName)
+            account.setConfigurationValue("pop3/servicetype", "source", __defaultServiceName)
+        }
 
-//        account.setConfigurationValue("smtp/smtppassword", smtpPasswordField.text, __defaultServiceName)
-//        account.setConfigurationValue("smtp/smtpusername", smtpUsernameField.text, __defaultServiceName)
-//        //change to username depending on the design
-//        account.setConfigurationValue("smtp/address", smtpUsernameField.text, __defaultServiceName)
-//        account.setConfigurationValue("smtp/server", smtpServerField.text, __defaultServiceName)
-//        account.setConfigurationValue("smtp/port", smtpPortField.text, __defaultServiceName)
-//        account.setConfigurationValue("smtp/encryption", smtpSecureConnection.currentIndex, __defaultServiceName)
-//        account.setConfigurationValue("smtp/authentication", smtpAuthentication.currentIndex, __defaultServiceName)
-//        account.setConfigurationValue("smtp/servicetype", "sink", __defaultServiceName)
+        account.setConfigurationValue("smtp/smtppassword", smtpPasswordField.text, __defaultServiceName)
+        account.setConfigurationValue("smtp/smtpusername", smtpUsernameField.text, __defaultServiceName)
+        //change to username depending on the design
+        account.setConfigurationValue("smtp/address", smtpUsernameField.text, __defaultServiceName)
+        account.setConfigurationValue("smtp/server", smtpServerField.text, __defaultServiceName)
+        account.setConfigurationValue("smtp/port", smtpPortField.text, __defaultServiceName)
+        account.setConfigurationValue("smtp/encryption", smtpSecureConnection.currentIndex, __defaultServiceName)
+        account.setConfigurationValue("smtp/authentication", smtpAuthentication.currentIndex, __defaultServiceName)
+        account.setConfigurationValue("smtp/servicetype", "sink", __defaultServiceName)
 
-//        identity.sync()
+        identity.sync()
 
-//    }
+    }
 
-//    onRejected: {
-//        // if this is a new account, delete the account
-//        if (root.accountId === 0) {
-//            if (identity.status === Identity.Initialized) {
-//                identity.remove()
-//            }
-//            if (account.status === Account.Initialized) {
-//                account.remove()
-//            }
-//        }
-//    }
+    function reject() {
+        // if this is a new account, delete the account
+        if (root.accountId === 0) {
+            if (identity.status === Identity.Initialized) {
+                identity.remove()
+            }
+            if (account.status === Account.Initialized) {
+                account.remove()
+            }
+        }
+    }
 }
 
