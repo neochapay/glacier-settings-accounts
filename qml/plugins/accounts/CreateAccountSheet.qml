@@ -50,7 +50,7 @@ Page {
     // Stage one: pick a provider
     ListView {
         anchors.fill: parent
-        anchors.margins: UiConstants.DefaultMargin
+        anchors.margins: Theme.itemSpacingMedium
         model: AccountProviderModel { }
         delegate: ListViewItemWithActions {
             icon : model.providerIcon

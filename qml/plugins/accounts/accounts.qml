@@ -71,7 +71,6 @@ Page {
         }
         delegate:  ListViewItemWithActions {
             icon: model.accountIcon
-            iconColorized: false;
             label: model.providerDisplayName
             description: model.accountDisplayName;
             showNext: false;
