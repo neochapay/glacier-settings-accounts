@@ -110,7 +110,7 @@ Page {
 
             Item {
                 width: parent.width
-                height: theme.itemSizeSmall
+                height: Theme.itemSizeSmall
                 x: Theme.itemSpacingMedium
 
                 Image {
