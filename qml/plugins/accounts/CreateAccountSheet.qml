@@ -60,7 +60,7 @@ Page {
                 var componentFileName = "file:///usr/share/glacier-settings/qml/plugins/accounts/providers/" + provider.name + ".qml"
 
                 pageStack.push(Qt.resolvedUrl(componentFileName),
-                               { accountModel: accountModel })
+                               { accountModel: accountModel, provider: provider })
 
             }
         }
