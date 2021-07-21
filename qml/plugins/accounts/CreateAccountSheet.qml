@@ -53,17 +53,29 @@ Page {
         anchors.margins: Theme.itemSpacingMedium
         model: AccountProviderModel { }
         delegate: ListViewItemWithActions {
-            icon : model.providerIcon
+            icon : formatIcon(model.providerIcon)
             label: model.providerDisplayName
             onClicked: {
                 sheet.selectedProvider = model.providerName
                 var componentFileName = "file:///usr/share/glacier-settings/qml/plugins/accounts/providers/" + provider.name + ".qml"
 
                 pageStack.push(Qt.resolvedUrl(componentFileName),
-                               { accountModel: accountModel })
+                               { accountModel: accountModel, provider: provider })
 
             }
         }
     }
 
+
+    function formatIcon(icon) {
+        if(icon == "image://theme/graphic-service-generic-mail") {
+            return "image://theme/envelope"
+        }
+
+        if(icon == "icon-l-google") {
+            return "image://theme/at"
+        }
+
+        return icon
+    }
 }
