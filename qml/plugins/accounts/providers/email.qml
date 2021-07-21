@@ -116,7 +116,7 @@ Page {
 
             Item {
                 width: parent.width
-                height: theme.itemSizeSmall
+                height: Theme.itemSizeSmall
                 x: Theme.itemSpacingMedium
 
                 Image {
@@ -320,8 +320,6 @@ Page {
                 text: qsTr("Save")
                 onClicked: {
                     accepted()
-                    if (stackView) { stackView.pop() }
-                    if (stackView) { stackView.pop() }
                 }
             }
 
@@ -369,6 +367,8 @@ Page {
 
         identity.sync()
 
+                    if (stackView) { stackView.pop() }
+                    if (stackView) { stackView.pop() }
     }
 
     function reject() {
@@ -381,6 +381,11 @@ Page {
                 account.remove()
             }
         }
+
+
+                    if (stackView) { stackView.pop() }
+                    if (stackView) { stackView.pop() }
+
     }
 }
 

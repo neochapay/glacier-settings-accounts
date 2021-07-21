@@ -152,8 +152,6 @@ Page {
                 text: qsTr("Save")
                 onClicked: {
                     accepted();
-                    if (stackView) { stackView.pop() }
-                    if (stackView) { stackView.pop() }
                 }
             }
 
@@ -165,6 +163,10 @@ Page {
         identity.secret = incomingPasswordField.text
 
         identity.sync()
+
+        if (stackView) { stackView.pop() }
+        if (stackView) { stackView.pop() }
+
     }
 
     function reject() {
@@ -177,6 +179,9 @@ Page {
                 account.remove()
             }
         }
+
+        if (stackView) { stackView.pop() }
+        if (stackView) { stackView.pop() }
     }
 
 
