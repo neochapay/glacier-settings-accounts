@@ -53,7 +53,7 @@ Page {
         anchors.margins: Theme.itemSpacingMedium
         model: AccountProviderModel { }
         delegate: ListViewItemWithActions {
-            icon : model.providerIcon
+            icon : formatIcon(model.providerIcon)
             label: model.providerDisplayName
             onClicked: {
                 sheet.selectedProvider = model.providerName
@@ -66,4 +66,16 @@ Page {
         }
     }
 
+
+    function formatIcon(icon) {
+        if(icon == "image://theme/graphic-service-generic-mail") {
+            return "image://theme/envelope"
+        }
+
+        if(icon == "icon-l-google") {
+            return "image://theme/at"
+        }
+
+        return icon
+    }
 }
