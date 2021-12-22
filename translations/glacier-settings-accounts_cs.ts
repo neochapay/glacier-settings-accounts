@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/plugins/accounts/CreateAccountSheet.qml" line="42"/>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Účty</translation>
     </message>
 </context>
 <context>
@@ -14,7 +14,7 @@
     <message>
         <location filename="../qml/plugins/accounts/accounts.qml" line="42"/>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Účty</translation>
     </message>
 </context>
 <context>
@@ -35,12 +35,12 @@
     <message>
         <location filename="../qml/plugins/accounts/providers/jabber.qml" line="43"/>
         <source>Jabber</source>
-        <translation type="unfinished"></translation>
+        <translation>Jabber</translation>
     </message>
     <message>
         <location filename="../qml/plugins/accounts/providers/jabber.qml" line="152"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit</translation>
     </message>
 </context>
 </TS>
