@@ -16,7 +16,8 @@ install(DIRECTORY qml/plugins/accounts
 install(FILES qml/plugins/accounts/providers/jabber.provider
     DESTINATION /usr/share/accounts/providers)
 
-
+install(FILES qml/plugins/accounts/providers/icon-s-common-jabber.png
+    DESTINATION /usr/share/themes/glacier/meegotouch/icons)
 # Translations
 #file(GLOB TS_FILES translations/*.ts)
 #qt5_add_translation(QM_FILES ${TS_FILES})
