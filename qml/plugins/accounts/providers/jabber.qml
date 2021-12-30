@@ -100,6 +100,7 @@ Page {
         id: flickable
 
         anchors.fill: parent
+        anchors.margins: Theme.itemSpacingMedium
         contentHeight: contentColumn.height
 
         Column {
