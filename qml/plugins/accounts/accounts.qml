@@ -60,15 +60,26 @@ Page {
 
     }
 
+    AccountModel {
+        id: accountModel
+    }
+
+    AccountManager {
+        id: accountManager
+    }
+
+    Label{
+        text: qsTr("No accounts")
+        anchors.centerIn: parent
+        visible: accountListView.count == 0
+    }
+
     ListView {
-        id: flickable
+        id: accountListView
         anchors.fill: parent
-        model: AccountModel {
-            id: accountModel
-        }
-        AccountManager {
-            id: accountManager
-        }
+        model: accountModel
+        visible: accountListView.count > 0
+
         delegate:  ListViewItemWithActions {
             icon: model.accountIcon
             label: model.providerDisplayName
@@ -76,8 +87,8 @@ Page {
             showNext: false;
             onClicked: {
                 console.log("edit")
-
             }
+
             actions:[
                 ActionButton {
                     iconSource: "image://theme/times"
@@ -89,16 +100,11 @@ Page {
                 }
 
             ]
-
         }
 
+        ScrollDecorator{
+            id: accountListDecorator
+            flickable: accountListView
+        }
     }
-
-    ScrollDecorator{
-        id: decorator
-        flickable: flickable
-    }
-
 }
-
-

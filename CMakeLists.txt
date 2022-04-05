@@ -4,6 +4,8 @@ project(glacier-settings-accounts
         VERSION 0.1
         DESCRIPTION "The Glacier settings accounts plugin")
 
+set(CMAKE_INSTALL_PREFIX /usr)
+
 find_package(Qt5 COMPONENTS Qml LinguistTools REQUIRED)
 
 

@@ -30,10 +30,11 @@
  */
 
 import QtQuick 2.0
-import org.nemomobile.accounts 1.0
 import QtQuick.Controls 1.0
 import QtQuick.Controls.Nemo 1.0
 import QtQuick.Controls.Styles.Nemo 1.0
+
+import org.nemomobile.accounts 1.0
 
 Page {
     id: sheet
@@ -76,6 +77,6 @@ Page {
             return "image://theme/at"
         }
 
-        return icon
+        return "image://theme/"+icon
     }
 }
