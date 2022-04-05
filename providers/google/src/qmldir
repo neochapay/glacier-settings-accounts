@@ -1,0 +1,2 @@
+module org.nemomobile.googleauth
+plugin nemogoogleauth

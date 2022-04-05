@@ -5,8 +5,14 @@ project(glacier-settings-accounts
         DESCRIPTION "The Glacier settings accounts plugin")
 
 set(CMAKE_INSTALL_PREFIX /usr)
+set(CMAKE_AUTOMOC ON)
 
-find_package(Qt5 COMPONENTS Qml LinguistTools REQUIRED)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+include(FeatureSummary)
+include(GNUInstallDirs)
+
+set(QT_MIN_VERSION "5.8.0")
+find_package(Qt5 COMPONENTS Core Qml Quick LinguistTools NetworkAuth REQUIRED)
 
 install(FILES plugins/accounts.json
         DESTINATION /usr/share/glacier-settings/plugins)
