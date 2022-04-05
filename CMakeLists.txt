@@ -8,18 +8,14 @@ set(CMAKE_INSTALL_PREFIX /usr)
 
 find_package(Qt5 COMPONENTS Qml LinguistTools REQUIRED)
 
-
 install(FILES plugins/accounts.json
         DESTINATION /usr/share/glacier-settings/plugins)
 
 install(DIRECTORY qml/plugins/accounts
         DESTINATION /usr/share/glacier-settings/qml/plugins)
 
-install(FILES qml/plugins/accounts/providers/jabber.provider
-    DESTINATION /usr/share/accounts/providers)
+add_subdirectory(providers)
 
-install(FILES qml/plugins/accounts/providers/icon-s-common-jabber.png
-    DESTINATION /usr/share/themes/glacier/meegotouch/icons)
 # Translations
 file(GLOB TS_FILES translations/*.ts)
 qt5_add_translation(QM_FILES ${TS_FILES})

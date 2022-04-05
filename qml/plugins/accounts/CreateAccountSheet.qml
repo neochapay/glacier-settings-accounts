@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 Robin Burchell <robin+mer@viroteck.net>
+ * Copyright (C) 2022 Chupligin Sergey (NeoChapay) <neochapay@gmail.com>
  *
  * You may use this file under the terms of the BSD license as follows:
  *
@@ -58,7 +59,7 @@ Page {
             label: model.providerDisplayName
             onClicked: {
                 sheet.selectedProvider = model.providerName
-                var componentFileName = "file:///usr/share/glacier-settings/qml/plugins/accounts/providers/" + provider.name + ".qml"
+                var componentFileName = "file:///usr/share/glacier-settings/qml/plugins/accounts/providers/" + provider.name + "/"  + provider.name + ".qml"
 
                 pageStack.push(Qt.resolvedUrl(componentFileName),
                                { accountModel: accountModel, provider: provider })
