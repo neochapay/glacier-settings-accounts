@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 Robin Burchell <robin+mer@viroteck.net>
+ * Copyright (C) 2022 Chupligin Sergey (NeoChapay) <neochapay@gmail.com>
  *
  * You may use this file under the terms of the BSD license as follows:
  *
@@ -30,10 +31,11 @@
  */
 
 import QtQuick 2.0
-import org.nemomobile.accounts 1.0
 import QtQuick.Controls 1.0
 import QtQuick.Controls.Nemo 1.0
 import QtQuick.Controls.Styles.Nemo 1.0
+
+import org.nemomobile.accounts 1.0
 
 Page {
     id: sheet
@@ -57,7 +59,7 @@ Page {
             label: model.providerDisplayName
             onClicked: {
                 sheet.selectedProvider = model.providerName
-                var componentFileName = "file:///usr/share/glacier-settings/qml/plugins/accounts/providers/" + provider.name + ".qml"
+                var componentFileName = "file:///usr/share/glacier-settings/qml/plugins/accounts/providers/" + provider.name + "/"  + provider.name + ".qml"
 
                 pageStack.push(Qt.resolvedUrl(componentFileName),
                                { accountModel: accountModel, provider: provider })
@@ -76,6 +78,6 @@ Page {
             return "image://theme/at"
         }
 
-        return icon
+        return "image://theme/"+icon
     }
 }

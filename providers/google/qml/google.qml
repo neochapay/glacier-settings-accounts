@@ -1,5 +1,4 @@
 /*
- * Copyright (C) 2013 Robin Burchell <robin+mer@viroteck.net>
  * Copyright (C) 2022 Chupligin Sergey (NeoChapay) <neochapay@gmail.com>
  *
  * You may use this file under the terms of the BSD license as follows:
@@ -35,77 +34,34 @@ import QtQuick.Controls 1.0
 import QtQuick.Controls.Nemo 1.0
 import QtQuick.Controls.Styles.Nemo 1.0
 
-import org.nemomobile.accounts 1.0
+import QtWebEngine 1.0
+
+import org.nemomobile.googleauth 1.0
 
 Page {
+    id: googleAccountPage
 
     headerTools: HeaderToolsLayout {
-        title: qsTr("Accounts");
-        showBackButton: true;
+        title: qsTr("Google")
+        showBackButton: true
+    }
 
-        tools: [
-            ToolButton {
-                iconSource: "image://theme/plus"
-                showCounter: false
-                onClicked: {
-                    console.log("ADD");
-                    onClicked: {
-                        pageStack.push(Qt.resolvedUrl("CreateAccountSheet.qml"),
-                                       { accountModel: accountModel })
+    GoogleAuth{
+        id: gAuth
+        onOpenUrl: {
+            view.url = authUrl
+        }
 
+        onAuthFinish: view.destroy()
 
-                    }
-                }
-            }
-        ]
+        Component.onCompleted: {
+            auth();
+        }
 
     }
 
-    AccountModel {
-        id: accountModel
-    }
-
-    AccountManager {
-        id: accountManager
-    }
-
-    Label{
-        text: qsTr("No accounts")
-        anchors.centerIn: parent
-        visible: accountListView.count == 0
-    }
-
-    ListView {
-        id: accountListView
+    WebEngineView{
+        id: view
         anchors.fill: parent
-        model: accountModel
-        visible: accountListView.count > 0
-
-        delegate:  ListViewItemWithActions {
-            icon: model.accountIcon
-            label: model.providerDisplayName
-            description: model.accountDisplayName;
-            showNext: false;
-            onClicked: {
-                console.log("edit")
-            }
-
-            actions:[
-                ActionButton {
-                    iconSource: "image://theme/times"
-
-                    onClicked: {
-                        console.log("remove");
-                        accountManager.removeAccount(accountManager.account(model.accountId))
-                    }
-                }
-
-            ]
-        }
-
-        ScrollDecorator{
-            id: accountListDecorator
-            flickable: accountListView
-        }
     }
 }

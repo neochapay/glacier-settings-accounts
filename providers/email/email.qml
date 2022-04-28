@@ -116,7 +116,7 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.itemSizeSmall
+                height: Theme.itemHeightSmall
                 x: Theme.itemSpacingMedium
 
                 Image {
@@ -136,12 +136,12 @@ Page {
 
             GlacierRoller {
                 id: serverType
-                label: "Incoming server type"
+                label: qsTr("Incoming server type")
                 width:  parent.width
 
                 model: ListModel {
-                    ListElement { name: "IMAP4" }
-                    ListElement { name: "POP3" }
+                    ListElement { name: qsTr("IMAP4") }
+                    ListElement { name: qsTr("POP3") }
                 }
                 delegate: GlacierRollerItem{
                     Text{
@@ -160,7 +160,7 @@ Page {
                 id: incomingUsernameField
                 width: parent.width
                 inputMethodHints: Qt.ImhNoAutoUppercase
-                placeholderText: "Incoming server username"
+                placeholderText: qsTr("Incoming server username")
                 onTextChanged: {
                     if(!smtpUsernameEdited) {
                         smtpUsernameField.text = text
@@ -173,7 +173,7 @@ Page {
                 width: parent.width
                 inputMethodHints: Qt.ImhNoPredictiveText
                 echoMode: TextInput.Password
-                placeholderText: "Incoming server password"
+                placeholderText: qsTr("Incoming server password")
                 onTextChanged: {
                     if(!smtpPasswordEdited) {
                         smtpPasswordField.text = text
@@ -185,20 +185,18 @@ Page {
                 id: incomingServerField
                 width: parent.width
                 inputMethodHints: Qt.ImhNoAutoUppercase
-                placeholderText: "Incoming server address"
+                placeholderText: qsTr("Incoming server address")
             }
 
             GlacierRoller {
                 id: incomingSecureConnection
-                label: "Secure connection"
+                label: qsTr("Secure connection")
                 width:  parent.width
 
                 model: ListModel {
-                    ListElement {
-                        name: "None"
-                    }
-                    ListElement { name: "SSL" }
-                    ListElement { name: "TLS" }
+                    ListElement { name: qsTr("None") }
+                    ListElement { name: qsTr("SSL") }
+                    ListElement { name: qsTr("TLS") }
                 }
                 delegate: GlacierRollerItem{
                     Text{
@@ -218,14 +216,14 @@ Page {
                 id: incomingPortField
                 width: parent.width
                 inputMethodHints: Qt.ImhDigitsOnly
-                placeholderText: "Incoming server port"
+                placeholderText: qsTr("Incoming server port")
             }
 
             TextField {
                 id: smtpUsernameField
                 width: parent.width
                 inputMethodHints: Qt.ImhNoAutoUppercase
-                placeholderText: "Outgoing server username"
+                placeholderText: qsTr("Outgoing server username")
 
                 //solution for faster input, since most accounts have same credentials for
                 //username and password
@@ -241,7 +239,7 @@ Page {
                 width: parent.width
                 inputMethodHints: Qt.ImhNoPredictiveText
                 echoMode: TextInput.Password
-                placeholderText: "Outgoing server password"
+                placeholderText: qsTr("Outgoing server password")
                 onTextChanged: {
                     if(focus)
                         smtpPasswordEdited = true
@@ -252,18 +250,18 @@ Page {
                 id: smtpServerField
                 width: parent.width
                 inputMethodHints: Qt.ImhNoAutoUppercase
-                placeholderText: "Outgoing server address"
+                placeholderText: qsTr("Outgoing server address")
             }
 
             GlacierRoller  {
                 id: smtpSecureConnection
-                label: "Secure connection"
+                label: qsTr("Secure connection")
                 width:  parent.width
 
                 model: ListModel {
-                    ListElement { name: "None" }
-                    ListElement { name: "SSL" }
-                    ListElement { name: "TLS" }
+                    ListElement { name: qsTr("None") }
+                    ListElement { name: qsTr("SSL") }
+                    ListElement { name: qsTr("TLS") }
                 }
 
                 delegate: GlacierRollerItem{
@@ -283,24 +281,18 @@ Page {
                 id: smtpPortField
                 width: parent.width
                 inputMethodHints: Qt.ImhDigitsOnly
-                placeholderText: "Outgoing server port"
+                placeholderText: qsTr("Outgoing server port")
             }
 
 
             GlacierRoller {
                 id: smtpAuthentication
-                label: "Authentication"
+                label: qsTr("Authentication")
 
                 model: ListModel {
-                    ListElement {
-                        name: "None"
-                    }
-                    ListElement {
-                        name: "Password"
-                    }
-                    ListElement {
-                        name: "Encrypted Password"
-                    }
+                    ListElement { name: qsTr("None") }
+                    ListElement { name: qsTr("Password") }
+                    ListElement { name: qsTr("Encrypted Password") }
                 }
                 delegate: GlacierRollerItem{
                     Text{

@@ -100,6 +100,7 @@ Page {
         id: flickable
 
         anchors.fill: parent
+        anchors.margins: Theme.itemSpacingMedium
         contentHeight: contentColumn.height
 
         Column {
@@ -110,7 +111,7 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.itemSizeSmall
+                height: Theme.itemHeightSmall
                 x: Theme.itemSpacingMedium
 
                 Image {
@@ -132,7 +133,7 @@ Page {
                 id: incomingUsernameField
                 width: parent.width
                 inputMethodHints: Qt.ImhNoAutoUppercase
-                placeholderText: "Username"
+                placeholderText: qsTr("Username")
             }
 
             TextField {
@@ -140,7 +141,7 @@ Page {
                 width: parent.width
                 inputMethodHints: Qt.ImhNoPredictiveText
                 echoMode: TextInput.Password
-                placeholderText: "Password"
+                placeholderText: qsTr("Password")
             }
 
             /* TODO: server address and port customisation
